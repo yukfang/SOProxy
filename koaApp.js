@@ -1,6 +1,9 @@
 const fs     = require('fs');
 const Koa    = require('koa');
+const serve = require('koa-static')
+const path = require('path')
 const koaApp = new Koa();
+koaApp.use(serve(path.join(__dirname, '/public')))
 var port = (process.env.PORT ||  80 );
 
 koaApp.use(async (ctx, next) => {
