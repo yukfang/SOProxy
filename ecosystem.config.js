@@ -2,6 +2,7 @@ module.exports = {
   apps : [
     {
       "ignore_watch" : [
+        "public"
       ],
       "watch_options": {
         "followSymlinks": false,
@@ -10,7 +11,7 @@ module.exports = {
 
       script  : "./index.js",
       watch   : true,
-      name    : "sosrv",
+      name    : "soproxy",
       instances  : 1
     }
 
