@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script>
+        const JumpList = [
+            'dev.shinefei.com',
+            'pre1.jasperbird.com',
+        ]
+        const refer = document.referrer
+        if(refer.length > 1) {
+            for(let i = 0; i < JumpList.length; i++) {
+                if(refer.indexOf(JumpList[i]) !== -1) {
+                    window.location.href = `http://${JumpList[(i+1) % JumpList.length]}`
+                    console.log(`${JumpList[i]} -> ${JumpList[(i+1) % JumpList.length]}`)
+                }
+            }
+        } else {
+            window.location.href = `http://${JumpList[0]}`
+        }
+
+    </script>
+    <script>
+        const pageUrl   = window.location.href
+        console.log(pageUrl)
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const nextPage  = urlParams.get('page');
+
+    </script>
+</head>
+<body>
+
+</body>
+
+</html>

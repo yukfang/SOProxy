@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<!-- Head -->
+<head>
+
+  <script>
+    const PIXEL_CODE = 'CH3L2OJC77UEADR7DK60'
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++
+)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=i+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    
+      ttq.load(PIXEL_CODE);
+      ttq.page();
+    }(window, document, 'ttq');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <script>
+        const delay = (ms) => {
+            return new Promise((res, rej) => {
+                setTimeout(res, ms * 1000)
+            })
+        }
+        function getCookie(name) {
+            let cookie = {};
+            document.cookie.split(';').forEach(function(el) {
+                let [k,v] = el.split('=');
+                cookie[k.trim()] = v;
+            })
+            return cookie[name];
+        }
+
+        const syncapi = props => {
+            axios
+                .post('./event', props)
+                .then(response => {
+                    console.log(`Event Synced...`, response.data)
+                })
+                .catch(error => console.error(error))
+        }
+
+        async function send_dual_event(event_type, prop, turb){
+            const event_time = (new Date()).getTime()  
+            ttq.track(event_type,   {event_id: '' + getCookie('_ttp') + (event_time + turb )})
+            syncapi({
+                pixel_code: PIXEL_CODE,
+                event_type,
+                event_time: event_time,
+                event_id  : '' + getCookie('_ttp') + (event_time + turb + turb),
+                url: window.location.href || `https://${(new Date()).getTime()}.com`,
+                ttp: getCookie('_ttp') || '123',
+                ttclid: getCookie('ttclid') || null,
+                email: `0c7e6a405862e402eb76a70f8a26fc732d07c32931e9fae9ab1582911d2e8a3b`,
+                prop
+            })
+        }
+
+        async function trigger_data() {
+            const round = 10
+            for(let r = 0; r < round; r++) {
+                const turb = (r < round - 1 ) ? 0 : 1
+                for(let i = 0; i++ < 4 ; send_dual_event('Subscribe',           {}, turb)){ await delay(1.1)} 
+                for(let i = 0; i++ < 10; send_dual_event('CompleteRegistration',{}, turb)){ await delay(1.1)} 
+                for(let i = 0; i++ < 5 ; send_dual_event('ClickButton',         {}, turb)){ await delay(1.1)} 
+                // for(let i = 0; i++ < 10 ; send_dual_event('calib',      {}, turb) )  { await delay(1.1)} 
+
+            }
+            setTimeout(() => {
+                window.location.href = 'http://localhost'
+            }, 5000);
+        }
+
+        trigger_data()
+    </script>
+</body>
+
+</html>

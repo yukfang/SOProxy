@@ -3,13 +3,11 @@ const Koa    = require('koa');
 const serve  = require('koa-static')
 const { bodyParser } = require("@koa/bodyparser");
 const fw_tt_eapi = require('./fw_tt_api')
-const PixelLib = { 
-    'CL11QHJC77UDR4OH8UKG' : 'e6852684567a381406732128a41e3f575a4bcb91' //test
-}
+
 
 const path   = require('path')
 const koaApp = new Koa();
-koaApp.use(serve(path.join(__dirname, '/public')))
+// koaApp.use(serve(path.join(__dirname, '/public')))
 koaApp.use(bodyParser());
 var port = (process.env.PORT ||  80 );
 
@@ -34,12 +32,23 @@ koaApp.use(async (ctx, next) => {
         const headers = ctx.request.headers
         const body = ctx.request.body;
         // console.log(headers)
-        console.log(body)
-        console.log(body.pixel_code)
+        // console.log(body)
+        // console.log(body.pixel_code)
         fw_tt_eapi(body)
         ctx.body = 'ok'
     }  else if (ctx.path === '/') {
-        ctx.body = fs.readFileSync('index.html', {encoding:'utf8', flag:'r'});
+        const hostname = ctx.request.hostname
+        if(hostname === 'pre1.jasperbird.com') {
+            ctx.body = fs.readFileSync('./public/jasperbird/test.html', {encoding:'utf8', flag:'r'});
+        } else if(hostname === 'dev.shinefei.com') {
+            console.log(hostname)
+            ctx.body = fs.readFileSync('./public/shinefei/test.html', {encoding:'utf8', flag:'r'});
+        } else if(hostname === 'localhost') {
+            console.log(hostname)
+            ctx.body = fs.readFileSync('./public/localhost/index.html', {encoding:'utf8', flag:'r'});
+        } else {
+            ctx.body = fs.readFileSync('./public/index.html', {encoding:'utf8', flag:'r'});
+        }
     } else {
         ctx.body = 'Hello World: ' + ctx.path;
     }
