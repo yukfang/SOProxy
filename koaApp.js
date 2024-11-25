@@ -39,7 +39,7 @@ koaApp.use(async (ctx, next) => {
     }  else if (ctx.path === '/') {
         const hostname = ctx.request.hostname
         if(hostname === 'infoldgames.qcreator.tech') {
-            ctx.body = fs.readFileSync('./public/jasperbird/test.html', {encoding:'utf8', flag:'r'});
+            ctx.body = fs.readFileSync('./public/infoldgames/index.html', {encoding:'utf8', flag:'r'});
         } else if(hostname === 'dev.shinefei.com') {
             console.log(hostname)
             ctx.body = fs.readFileSync('./public/shinefei/test.html', {encoding:'utf8', flag:'r'});
