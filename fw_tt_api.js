@@ -4,6 +4,7 @@ const PixelLib = {
     'CL11QHJC77UDR4OH8UKG' : 'e6852684567a381406732128a41e3f575a4bcb91', // Test
     'CLLJMLRC77UEE5O898U0' : 'be8e3bc8af6ae0731c1d81720ad85925ad76bb6c', // Elysian 
     'CH3L2OJC77UEADR7DK60' : '58be96d82921d12f5970806582ce70019ff95fb6', // Jasperbird.com
+    'CT1UFBJC77U9RNPH9PGG' : '43811481b5cd2081423ab927bad0944822e8c396', // 叠纸 - 测试
 }
 
 async function fw_tt_eapi(args){
@@ -24,8 +25,9 @@ async function fw_tt_eapi(args){
               "event_id"  : `${args.event_id}`,  
               "user"      : {
                     "ttclid": `${args.ttclid}`, 
-                    "ip"    : "1.1.1.1", 
-                    "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/117.0.0.0", 
+                    "ip"    : args.ipv4,
+                    "user_agent" : args.ua,
+                    // "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/117.0.0.0", 
                     // "phone": "0c7e6a405862e402eb76a70f8a26fc732d07c32931e9fae9ab1582911d2e8a3b",
                     "email": `${args.email}`, 
               },

@@ -30,7 +30,10 @@ koaApp.use(async (ctx, next) => {
     console.log('-------------------------------------------------------------------')
     if (ctx.path === '/event') {
         const headers = ctx.request.headers
-        const body = ctx.request.body;
+        const body = ctx.request.body
+        body.ua = headers['user-agent']
+        builtinModules.ipv4 = ctx.request.ip
+        // const ua = headers
         // console.log(headers)
         // console.log(body)
         // console.log(body.pixel_code)
@@ -44,8 +47,18 @@ koaApp.use(async (ctx, next) => {
             console.log(hostname)
             ctx.body = fs.readFileSync('./public/shinefei/test.html', {encoding:'utf8', flag:'r'});
         } else if(hostname === 'localhost') {
-            console.log(hostname)
-            ctx.body = fs.readFileSync('./public/localhost/index.html', {encoding:'utf8', flag:'r'});
+            const headers = ctx.request.headers
+            const body = ctx.request.body
+            const ua = headers['user-agent']
+            // const ua = headers
+            // console.log(headers)
+            // console.log(body)
+            // console.log(body.pixel_code)
+            // fw_tt_eapi(body)
+            ctx.body = {
+                ua,
+                ipv4: ctx.request.ip
+            }
         } else {
             ctx.body = fs.readFileSync('./public/index.html', {encoding:'utf8', flag:'r'});
         }
