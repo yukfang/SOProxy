@@ -31,7 +31,10 @@ koaApp.use(async (ctx, next) => {
         const headers = ctx.request.headers
         const body = ctx.request.body
         body.ua = headers['user-agent']
-        // body.ipv4 = headers['x-client-ip']
+        body.ipv4 = headers['x-client-ip']
+        const currentTimeMillis = Date.now();
+        const currentTimeSeconds = Math.floor(currentTimeMillis / 1000);
+        body.event_time = currentTimeSeconds
 
         // const ua = headers
         // console.log(headers)
