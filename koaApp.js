@@ -47,6 +47,7 @@ koaApp.use(async (ctx, next) => {
             const headers = ctx.request.headers
             const body = ctx.request.body
             const ua = headers['user-agent']
+            const ipv4 = headers['x-client-ip']
             // const ua = headers
             // console.log(headers)
             // console.log(body)
@@ -54,7 +55,7 @@ koaApp.use(async (ctx, next) => {
             // fw_tt_eapi(body)
             ctx.body = {
                 ua,
-                ipv4: ctx.request.ip,
+                ipv4,
                 headers
             }
         } else {
