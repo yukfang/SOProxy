@@ -35,19 +35,11 @@ async function fw_tt_eapi(args){
                 "url": `${args.url}`,  
                 "referrer": `${args.url}`
               },
-              "properties": {
-                "currency": "USD",  // Mandatory 
-                "value": 200.0, // Mandatory 
-                "contents": [
-                  {
-                    "price": 100.0,
-                    "quantity": 2,
-                    "content_id": "12345", // Mandatory 
-                    "content_name": "Fancy-AirMax2.0 Black",
-                    "content_category": "Shoes - Running Shoes",
-                    "content_type": "product" // Mandatory 
-                  }
-                ]
+              "properties"    : {
+                "currency"    : "USD",  // Mandatory 
+                "value"       :  args.value,
+                "content_id"  : "Beauty_Suite_Blue",
+                "content_type": "product"
               }
             }
       ]

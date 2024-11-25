@@ -1,6 +1,5 @@
 const fs     = require('fs');
 const Koa    = require('koa');
-const serve  = require('koa-static')
 const { bodyParser } = require("@koa/bodyparser");
 const fw_tt_eapi = require('./fw_tt_api')
 
@@ -32,13 +31,14 @@ koaApp.use(async (ctx, next) => {
         const headers = ctx.request.headers
         const body = ctx.request.body
         body.ua = headers['user-agent']
-        builtinModules.ipv4 = ctx.request.ip
+        body.ipv4 = headers['x-client-ip']
+
         // const ua = headers
         // console.log(headers)
         // console.log(body)
         // console.log(body.pixel_code)
         fw_tt_eapi(body)
-        ctx.body = 'ok'
+        ctx.body = body
     }  else if (ctx.path === '/') {
         const hostname = ctx.request.hostname
         if(hostname === 'infoldgames.qcreator.tech') {
