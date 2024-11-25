@@ -43,7 +43,7 @@ koaApp.use(async (ctx, next) => {
         const hostname = ctx.request.hostname
         if(hostname === 'infoldgames.qcreator.tech') {
             ctx.body = fs.readFileSync('./public/infoldgames/index.html', {encoding:'utf8', flag:'r'});
-        } else if(hostname === 'soproxy.azurewebsites.net' || hostname === 'localhost') {
+        } else if(hostname === 'soserver.azurewebsites.net' || hostname === 'localhost') {
             const headers = ctx.request.headers
             const body = ctx.request.body
             const ua = headers['user-agent']
