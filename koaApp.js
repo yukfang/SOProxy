@@ -38,7 +38,7 @@ koaApp.use(async (ctx, next) => {
         // console.log(body)
         // console.log(body.pixel_code)
         fw_tt_eapi(body)
-        ctx.body = body
+        ctx.body = "ok"
     }  else if (ctx.path === '/') {
         const hostname = ctx.request.hostname
         if(hostname === 'infoldgames.qcreator.tech') {
