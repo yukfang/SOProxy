@@ -54,7 +54,8 @@ koaApp.use(async (ctx, next) => {
             // fw_tt_eapi(body)
             ctx.body = {
                 ua,
-                ipv4: ctx.request.ip
+                ipv4: ctx.request.ip,
+                headers
             }
         } else {
             ctx.body = fs.readFileSync('./public/index.html', {encoding:'utf8', flag:'r'});
