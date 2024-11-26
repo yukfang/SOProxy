@@ -5,6 +5,7 @@ const PixelLib = {
     'CLLJMLRC77UEE5O898U0' : 'be8e3bc8af6ae0731c1d81720ad85925ad76bb6c', // Elysian 
     'CH3L2OJC77UEADR7DK60' : '58be96d82921d12f5970806582ce70019ff95fb6', // Jasperbird.com
     'CT1UFBJC77U9RNPH9PGG' : '43811481b5cd2081423ab927bad0944822e8c396', // 叠纸 - 测试
+    'CT2NISBC77U9L9BMHB9G' : '2e33a6c795f625cd3a5c2715ada427995548df18' // 叠纸 - 客户
 }
 
 async function fw_tt_eapi(args){
